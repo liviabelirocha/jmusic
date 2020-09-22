@@ -17,9 +17,7 @@ public class AppController {
   @FXML
   private Pane musicsPane;
   @FXML
-  private Pane myPlaylistPane;
-  @FXML
-  private Pane playlistPane;
+  private Pane playlistsPane;
 
   @FXML
   void handlePaneChange(ActionEvent event) {
@@ -30,7 +28,7 @@ public class AppController {
 
   private void handleNavigation(Object source) {
     if (source == playlistButton) {
-      playlistPane.toFront();
+      playlistsPane.toFront();
     } else if (source == musicButton) {
       musicsPane.toFront();
     } else if (source == exitButton) {

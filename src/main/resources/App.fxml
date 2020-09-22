@@ -3,52 +3,34 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AppController">
+<AnchorPane maxHeight="768.0" maxWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AppController">
     <children>
-        <AnchorPane prefHeight="600.0" prefWidth="169.0" style="-fx-background-color: #373135;">
+        <AnchorPane layoutX="260.0" prefHeight="768.0" prefWidth="1199.0">
+            <fx:include fx:id="musicsPane" source="MusicsPane.fxml" />
+            <fx:include fx:id="playlistsPane" source="PlaylistPane.fxml" />
+        </AnchorPane>
+        <AnchorPane prefHeight="768.0" prefWidth="254.0" style="-fx-background-color: #373135;">
             <effect>
                 <DropShadow />
             </effect>
             <children>
-                <JFXButton fx:id="playlistButton" layoutX="-16.0" layoutY="184.0" onAction="#handlePaneChange" prefHeight="48.0" prefWidth="187.0" text="Playlists" textFill="WHITE">
+                <JFXButton fx:id="playlistButton" layoutX="-114.0" layoutY="184.0" onAction="#handlePaneChange" prefHeight="48.0" prefWidth="380.0" text="Playlists" textFill="WHITE">
                     <font>
                         <Font size="25.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="musicButton" layoutX="-17.0" layoutY="247.0" onAction="#handlePaneChange" prefHeight="48.0" prefWidth="187.0" text="Músicas" textFill="WHITE">
+                <JFXButton fx:id="musicButton" layoutX="-114.0" layoutY="248.0" onAction="#handlePaneChange" prefHeight="48.0" prefWidth="380.0" text="Músicas" textFill="WHITE">
                     <font>
                         <Font size="25.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="exitButton" layoutX="-65.0" layoutY="316.0" prefHeight="48.0" prefWidth="235.0" text="Sair" textFill="WHITE">
+                <JFXButton fx:id="exitButton" layoutX="-164.0" layoutY="316.0" prefHeight="48.0" prefWidth="430.0" text="Sair" textFill="WHITE">
                     <font>
                         <Font size="25.0" />
                     </font>
                 </JFXButton>
-            </children>
-        </AnchorPane>
-        <AnchorPane layoutX="171.0" prefHeight="600.0" prefWidth="701.0">
-            <children>
-                <Pane fx:id="musicsPane" prefHeight="600.0" prefWidth="701.0" style="-fx-background-color: #151314;">
-                    <children>
-                        <Text fill="WHITE" layoutX="41.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Músicas" wrappingWidth="226.7294921875">
-                            <font>
-                                <Font size="50.0" />
-                            </font>
-                        </Text>
-                        <JFXButton id="add-music-button" layoutX="430.0" layoutY="83.0" prefHeight="48.0" prefWidth="254.0" styleClass="add-music-button" text="Adicionar musica" textFill="WHITE">
-                            <font>
-                                <Font size="25.0" />
-                            </font>
-                        </JFXButton>
-                    </children>
-                </Pane>
-                <Pane fx:id="myPlaylistPane" prefHeight="600.0" prefWidth="701.0" style="-fx-background-color: #151314;" />
-                <Pane fx:id="playlistPane" prefHeight="600.0" prefWidth="701.0" style="-fx-background-color: #151314;" />
             </children>
         </AnchorPane>
     </children>
