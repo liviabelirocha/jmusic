@@ -10,17 +10,17 @@ App that play musics in your computer and creates playlist.
 
 **Observação**: follow [instructions](https://maven.apache.org/install.html) to install maven in your machine.
 
-## Build
+## Start
 
-Execute the project with:
+Execute the jmusic api with:
 
 ```shell script
-$ mvn clean javafx:run
+$./mvnw spring-boot:run
 ```
 
 ## Contributing
 
-- Fork it 
+- Fork it
 - Git clone forked project
 - Create your branch
 - Code changes
