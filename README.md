@@ -8,7 +8,7 @@ App that play musics in your computer and creates playlist.
 - Maven
 - MongoDB
 
-**Observação**: follow [instructions](https://maven.apache.org/install.html) to install maven in your machine.
+**Note**: follow [instructions](https://maven.apache.org/install.html) to install maven in your machine.
 
 ## Start
 

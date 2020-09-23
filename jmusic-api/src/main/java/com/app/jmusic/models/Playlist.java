@@ -18,12 +18,4 @@ public class Playlist {
   private String name;
   private Date creationDate;
   private List<String> musics;
-
-  List<String> getMusics() {
-    return this.musics;
-  }
-
-  void setMusics(List<String> newMusics) {
-    this.musics = newMusics;
-  }
 }
