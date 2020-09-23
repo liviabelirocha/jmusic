@@ -1,10 +1,12 @@
 import React from 'react';
-import './App.css';
+
+import { PrimaryButton, LinkButton, AddButton } from './UI/Button';
 
 export default function App() {
   return (
     <div className="App">
-      Teste
+
+
     </div>
   );
 }
