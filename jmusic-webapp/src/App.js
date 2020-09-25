@@ -3,13 +3,15 @@ import styled from 'styled-components';
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Menu } from './components/Menu/Menu';
-import { Content } from './components/Content/Content';
 import { hFlexDisplay } from './styles/StyleUtils';
 
+import { Musics } from './views/Musics';
+import { Playlists } from './views/Playlists';
+
 const StyledApp = styled.div`
-  ${hFlexDisplay('stretch', 'stretch')}
   display: inline-block;
   overflow: none;
+  ${hFlexDisplay('stretch', 'stretch')};
 `;
 
 export default function App() {
@@ -20,15 +22,11 @@ export default function App() {
         <Router>
           <Switch>
             <Route exact path='/playlists'>
-              <Content>
-                <div style={{ color: 'white'}}>aaaaaaaa</div>
-              </Content>
+              <Playlists />
             </Route>
 
             <Route path='/musics'>
-              <Content>
-                <div style={{ color: 'white'}}>bbbbbbbbb</div>
-              </Content>
+              <Musics />
             </Route>
 
             <Route path='/'>

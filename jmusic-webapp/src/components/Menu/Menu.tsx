@@ -3,8 +3,6 @@ import { StyledMenu, StyledLink } from './Style';
 import { MenuItem } from './MenuItem';
 
 export const Menu = () => {
-  const [selected, setSelected] = useState();
-
   const [items, setItems] = useState([
     { id: 0, name: 'Playlists', path: '/playlists', selected: true },
     { id: 1, name: 'Músicas', path: '/musics', selected: false }

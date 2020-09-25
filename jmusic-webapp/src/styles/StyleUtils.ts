@@ -13,5 +13,5 @@ export const vFlexDisplay = (justifyContent: JustifyContent, alignItems: AlignCo
 export const hFlexDisplay = (justifyContent: JustifyContent, alignItems: AlignContent) => css`
   display: flex;
   align-items: ${alignItems};
-  justify-content: ${justifyContent}
+  justify-content: ${justifyContent};
 `;
