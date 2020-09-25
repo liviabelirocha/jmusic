@@ -19,14 +19,14 @@ export const StyledAddButton = styled.button`
     left: 0;
     width: 0;
     height: 100%;
-    opacity: 0.8;
+    opacity: 0.3;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     transition: all .5s linear;
   }
 
   &:active:after {
-    background-color: #383236;
+    background-color: #94DAA0;
     width: 100%;
     transition: 0s;
   }

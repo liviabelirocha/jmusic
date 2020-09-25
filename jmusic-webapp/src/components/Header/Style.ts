@@ -3,7 +3,6 @@ import { hFlexDisplay } from '../../styles/StyleUtils';
 
 export const StyledHeader = styled.header`
   margin-top: 50px;
-  color: #fff;
 
   .header-content {
     & > h2 {

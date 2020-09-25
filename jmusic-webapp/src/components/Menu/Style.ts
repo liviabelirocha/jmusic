@@ -7,10 +7,8 @@ export const StyledMenu = styled.ul`
   background-color: #383236;
   height: 100vh;
   width: 300px;
-  list-style: none;
   padding: 0;
   margin: 0;
-  color: #fff;
 `;
 
 export const StyledLink = styled(Link)`
