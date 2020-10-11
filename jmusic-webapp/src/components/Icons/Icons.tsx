@@ -1,7 +1,11 @@
 import React from 'react';
 import { StyledIconContent } from './Style';
 
-export const Pause = ({ }) => {
+interface IconProps {
+  onClick?: (e: React.MouseEvent) => void;
+}
+
+export const Pause: React.FC<IconProps> = ({ onClick }) => {
   return (
     <StyledIconContent>
       <svg x="0px" y="0px" viewBox="0 0 477.867 477.867">
@@ -20,9 +24,9 @@ export const Pause = ({ }) => {
   );
 }
 
-export const Play = ({ }) => {
+export const Play: React.FC<IconProps> = ({ onClick }) => {
   return (
-    <StyledIconContent>
+    <StyledIconContent onClick={onClick}>
       <svg x="0px" y="0px" viewBox="0 0 320.001 320.001">
         <path 
           className="jmusic-icon"

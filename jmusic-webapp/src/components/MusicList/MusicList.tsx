@@ -4,10 +4,7 @@ import { StyledMusicListContent, StyledMusicList } from './Style';
 import { MusicItem } from './MusicItem';
 import { Divider } from '../UI/Divider';
 
-interface MusicListProps {
-  musicType?: string,
-  musics?: string[],
-}
+import { MusicListProps } from '../../interfaces/MusicInterface';
 
 export const MusicList: React.FC<MusicListProps> = ({ musicType, musics }) => {
   return (

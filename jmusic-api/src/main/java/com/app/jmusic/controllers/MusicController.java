@@ -22,10 +22,18 @@ public class MusicController {
   }
 
   @GetMapping(path = "/music")
-  public ResponseEntity<Music> getMusic(@RequestParam("id") String musicId) throws Exception {
+  public ResponseEntity<List<Music>> getMusic(@RequestParam List<String> musicIds) throws Exception {
+    List<Music> musics = musicService.getMusics(musicIds);
+    return new ResponseEntity<List<Music>>(musics, HttpStatus.OK);
+  }
+
+  @GetMapping(path = "/music/{musicId}")
+  public ResponseEntity<Music> getMusic(@PathVariable("musicId") String musicId) throws Exception {
     Music music = musicService.getMusic(musicId);
     return new ResponseEntity<Music>(music, HttpStatus.OK);
   }
+
+
 
   @GetMapping(path = "/music/all")
   public ResponseEntity<List<Music>> getMusic() throws Exception {
@@ -41,8 +49,8 @@ public class MusicController {
     return new ResponseEntity<Music>(music, HttpStatus.OK);
   }
 
-  @DeleteMapping(path = "/music")
-  public ResponseEntity<Music> deleteMusic(@RequestParam("id") String musicId) throws Exception {
+  @DeleteMapping(path = "/music/{musicId}")
+  public ResponseEntity<Music> deleteMusic(@PathVariable("musicId") String musicId) throws Exception {
     Music music = musicService.deleteMusic(musicId);
 
     return new ResponseEntity<Music>(music, HttpStatus.OK);

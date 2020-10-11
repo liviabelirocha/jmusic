@@ -7,6 +7,7 @@ import { hFlexDisplay } from './styles/StyleUtils';
 
 import { Musics } from './views/Musics';
 import { Playlists } from './views/Playlists';
+import { Playlist } from './views/Playlist';
 
 const StyledApp = styled.div`
   display: inline-block;
@@ -21,16 +22,20 @@ export default function App() {
         <Menu />
         <Router>
           <Switch>
-            <Route exact path='/playlists'>
+            <Route exact path="/playlists">
               <Playlists />
             </Route>
 
-            <Route path='/musics'>
+            <Route path="/playlist/:playlistId">
+              <Playlist />
+            </Route>
+
+            <Route path="/musics">
               <Musics />
             </Route>
 
-            <Route path='/'>
-              <Redirect to='/playlists' />
+            <Route path="/">
+              <Redirect to="/playlists" />
             </Route>
           </Switch>
         </Router>

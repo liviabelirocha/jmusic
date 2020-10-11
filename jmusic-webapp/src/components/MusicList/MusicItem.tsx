@@ -7,12 +7,13 @@ interface MusicItemProps {
   name: string;
   controller?: boolean;
   extras?: ReactElement[];
+  onClick?: (e: React.MouseEvent) => void;
 }
 
-export const MusicItem: React.FC<MusicItemProps> = ({ name, controller = true, extras }) => {
+export const MusicItem: React.FC<MusicItemProps> = ({ name, controller = true, extras, onClick }) => {
   return (
     <StyledMusicItem>
-      { controller && <Play/>}
+      { controller && <Play onClick={onClick} />}
       <p className="name">{ name }</p>
       <div className="extras">
         <p className="time">00:00</p>
