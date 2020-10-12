@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 
 import { StyledMusicItem } from './Style';
-import { Play } from '../Icons/Icons';
+import { Play } from '../UI';
 
 interface MusicItemProps {
   name: string;

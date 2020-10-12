@@ -2,7 +2,7 @@ import React from 'react'
 
 import { StyledMusicListContent, StyledMusicList } from './Style';
 import { MusicItem } from './MusicItem';
-import { Divider } from '../UI/Divider';
+import { Divider } from '../UI';
 
 import { MusicListProps } from '../../interfaces/MusicInterface';
 

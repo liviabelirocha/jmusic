@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Header } from '../components/Header/Header'
-import { Content } from '../components/Content/Content';
-import { Box } from '../components/UI/Box';
-import { PlaylistHeaderInfo } from '../components/PlaylistHeaderInfo/PlaylistHeaderInfo';
-import { PlaylistMusics } from '../components/PlaylistMusics/PlaylistMusics';
+import { PlaylistMusicsContent } from '../components/PlaylistMusicsContent/PlaylistMusicsContent';
 
 import { getPlaylist } from '../services/playlistService';
 import { getMusicsByIds } from '../services/musicService';
@@ -47,23 +43,11 @@ export const Playlist = () => {
 
 
   return (
-    <Content>
-      {playlist && (
-        <Header
-          title={playlist.name}
-          extra={
-            <PlaylistHeaderInfo  
-              createdBy={'TESTE'}
-              amountOfMusics={playlist.musics.length}
-              duration={'00h'}
-            />
-          }
-        />
-      )}
-
-      <Box>
-        <PlaylistMusics musics={musics} loading={loadingMusics} />
-      </Box>
-    </Content>
+    <PlaylistMusicsContent 
+      playlist={playlist}
+      loadingPlaylist={loading}
+      musics={musics}
+      loadingMusics={loadingMusics}
+    />
   );
 }

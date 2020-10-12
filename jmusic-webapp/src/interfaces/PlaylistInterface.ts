@@ -19,6 +19,8 @@ export interface PlaylistHeaderInfoProps {
 }
 
 export interface PlaylistMusicsProps {
+  playlist: PlaylistObject | null;
   musics: MusicObject[];
-  loading: boolean;
+  loadingPlaylist: boolean;
+  loadingMusics: boolean;
 }

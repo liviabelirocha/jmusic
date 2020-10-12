@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { hFlexDisplay } from '../../styles/StyleUtils';
+import { hFlexDisplay } from '../../../styles/StyleUtils';
 
 export const StyledHeader = styled.header`
   margin-top: 50px;

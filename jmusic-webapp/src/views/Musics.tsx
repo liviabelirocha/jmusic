@@ -1,8 +1,6 @@
 import React from 'react'
 
-import { Header } from '../components/Header/Header';
-import { Content } from '../components/Content/Content';
-import { Box } from '../components/UI/Box';
+import { Header, Content, Box } from '../components/UI';
 import { AddButton } from '../components/AddButton/AddButton';
 import { MusicList } from '../components/MusicList/MusicList';
 
