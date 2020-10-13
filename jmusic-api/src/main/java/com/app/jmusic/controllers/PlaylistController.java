@@ -21,8 +21,8 @@ public class PlaylistController {
     return new ResponseEntity<Playlist>(playlistResp, HttpStatus.OK);
   }
 
-  @GetMapping(path = "/playlist")
-  public ResponseEntity<Playlist> getPlaylist(@RequestParam("id") String playlistId) throws Exception {
+  @GetMapping(path = "/playlist/{playlistId}")
+  public ResponseEntity<Playlist> getPlaylist(@PathVariable("playlistId") String playlistId) throws Exception {
     Playlist playlist = playlistService.getPlaylist(playlistId);
 
     return new ResponseEntity<Playlist>(playlist, HttpStatus.OK);
@@ -42,8 +42,8 @@ public class PlaylistController {
     return new ResponseEntity<Playlist>(playlistResp, HttpStatus.OK);
   }
 
-  @DeleteMapping(path = "/playlist")
-  public ResponseEntity<Playlist> deletePlaylist(@RequestParam("id") String playlistId) throws Exception {
+  @DeleteMapping(path = "/playlist/{playlistId}")
+  public ResponseEntity<Playlist> deletePlaylist(@PathVariable("playlistId") String playlistId) throws Exception {
     Playlist playlist = playlistService.deletePlaylist(playlistId);
 
     return new ResponseEntity<Playlist>(playlist, HttpStatus.OK);

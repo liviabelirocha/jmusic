@@ -6,6 +6,7 @@ import com.app.jmusic.servicesApi.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,16 @@ public class MusicServiceImpl implements MusicService<String, Music> {
   public List<Music> getMusic() throws Exception {
     return musicRepository.findAll();
   };
+
+  @Override
+  public List<Music> getMusics(List<String> musicIds) throws Exception {
+    Iterable<Music> musicsIterable = musicRepository.findAllById(musicIds);
+
+    List<Music> musics = new ArrayList<Music>();
+    musicsIterable.forEach(musics::add);
+
+    return musics;
+  }
 
 
   @Override

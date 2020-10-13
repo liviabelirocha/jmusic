@@ -7,5 +7,6 @@ public interface MusicService<ID, MUSIC> {
   MUSIC getMusic(ID musicId) throws Exception;
   MUSIC updateMusic(MUSIC music) throws Exception;
   List<MUSIC> getMusic() throws Exception;
+  List<MUSIC> getMusics(List<ID> musicIds) throws Exception;
   MUSIC deleteMusic(ID musicId) throws Exception;
 }

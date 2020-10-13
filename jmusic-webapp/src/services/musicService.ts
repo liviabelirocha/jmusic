@@ -10,6 +10,19 @@ export function getMusic(musicId: string) {
   return api.get(`/music/${musicId}`);
 }
 
+export function getMusicsByIds(musicIds: string[]) {
+  function createIdsRequest(str: string, cur: string, curInd: number, arr: string[]) {
+    if (curInd === arr.length - 1) {
+      return `${str}musicIds=${cur}`;
+    }
+
+    return `${str}musicIds=${cur}&`;
+  }
+
+
+  return api.get(`/music?${musicIds.reduce(createIdsRequest, "")}`);
+}
+
 export function getAllMusic() {
   return api.get('/music/all');
 }

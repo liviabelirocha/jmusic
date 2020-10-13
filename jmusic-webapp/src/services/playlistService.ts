@@ -11,7 +11,7 @@ export function getPlaylist(playlistId: string) {
 }
 
 export function getAllPlaylist() {
-  return api.get('/playlist');
+  return api.get('/playlist/all');
 }
 
 export function postPlaylist(playlist: Playlist) {

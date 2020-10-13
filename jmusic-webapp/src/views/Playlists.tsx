@@ -1,24 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { PlayListsContent } from '../components/PlayListsContent/PlayListsContent';
 
-import { Content } from '../components/Content/Content';
-import { Header } from '../components/Header/Header';
-import { AddButton } from '../components/AddButton/AddButton';
-import { Box } from '../components/UI/Box';
-import { PlayList } from '../components/PlayList/PlayList';
-
+import { getAllPlaylist } from '../services/playlistService';
 
 export const Playlists = () => {
-  return (
-    <Content>
-      <Header
-        title="Playlists"
-        button={<AddButton text="playlist" />}
-        extra={<p>Número de playlists: 0</p>}
-      />
+  const [loading, setLoading] = useState(false);
+  const [playlists, setPlaylists] = useState<any>([]);
 
-      <Box>
-        <PlayList />
-      </Box>
-    </Content>
-  );
+  useEffect(() => {
+    setLoading(true);
+    getAllPlaylist()
+      .then(playlists => setPlaylists(playlists.data))
+      .finally(() => setLoading(false));
+  }, []);
+
+
+  return <PlayListsContent playlists={playlists} loading={loading} />
 }

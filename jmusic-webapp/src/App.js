@@ -30,6 +30,10 @@ export default function App() {
               <Playlists />
             </Route>
 
+            <Route path="/playlist/:playlistId">
+              <Playlist />
+            </Route>
+
             <Route path="/musics">
               <Musics />
             </Route>

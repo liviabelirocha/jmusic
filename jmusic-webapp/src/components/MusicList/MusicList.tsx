@@ -2,21 +2,28 @@ import React from 'react'
 
 import { StyledMusicListContent, StyledMusicList } from './Style';
 import { MusicItem } from './MusicItem';
-import { Divider } from '../UI/Divider';
+import { Divider } from '../UI';
 
-interface MusicListProps {
-  musicType?: string,
-  musics?: string[],
-}
+import { MusicListProps, MusicObject } from '../../interfaces/MusicInterface';
 
-export const MusicList: React.FC<MusicListProps> = ({ musicType, musics }) => {
+export const MusicList: React.FC<MusicListProps> = ({ type, musics }) => {
+  function renderMusics(music: MusicObject) {
+    return (
+      <MusicItem 
+        key={music.id}
+        name={`${music.name} - ${music.author}`}
+      />
+    )
+  }
+
   return (
     <StyledMusicListContent>
-      <h3>{musicType}</h3>
+      <h3>{ type }</h3>
       <Divider />
-      <StyledMusicList>
-        <MusicItem name={"Shallow"} />
-      </StyledMusicList>
+      <StyledMusicList
+        data={musics}
+        render={renderMusics}
+      />
     </StyledMusicListContent>
   );
 }
