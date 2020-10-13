@@ -34,7 +34,7 @@ export const PlaylistMusicsContent: React.FC<PlaylistMusicsProps> = ({
           title={playlist.name}
           extra={
             <PlaylistHeaderInfo
-              createdBy={'TESTE'}
+              createdBy={playlist.createdBy}
               amountOfMusics={playlist.musics.length}
               duration={'00h'}
             />

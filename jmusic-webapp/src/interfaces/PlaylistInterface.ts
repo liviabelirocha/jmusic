@@ -3,6 +3,7 @@ import { MusicObject } from './MusicInterface';
 export interface PlaylistObject {
   id: string;
   name: string;
+  createdBy: string;
   creationDate: null | string;
   musics: string[];
 }

@@ -16,6 +16,8 @@ public class Playlist {
   private String id;
 
   private String name;
+  private String createdBy;
+  private double duration;
   private Date creationDate;
   private List<String> musics;
 }
