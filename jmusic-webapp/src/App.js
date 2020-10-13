@@ -1,18 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
-import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
-import { Menu } from './components/Menu/Menu';
-import { hFlexDisplay } from './styles/StyleUtils';
+import { Menu } from "./components/Menu/Menu";
+import { hFlexDisplay } from "./styles/StyleUtils";
 
-import { Musics } from './views/Musics';
-import { Playlists } from './views/Playlists';
-import { Playlist } from './views/Playlist';
+import { Musics } from "./views/Musics";
+import { Playlists } from "./views/Playlists";
 
 const StyledApp = styled.div`
   display: inline-block;
   overflow: none;
-  ${hFlexDisplay('stretch', 'stretch')};
+  ${hFlexDisplay("stretch", "stretch")};
 `;
 
 export default function App() {
