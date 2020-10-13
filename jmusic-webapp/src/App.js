@@ -7,11 +7,12 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import { Menu } from "./components/Menu/Menu";
-import { hFlexDisplay } from "./styles/StyleUtils";
+import { Menu } from './components/Menu/Menu';
+import { hFlexDisplay } from './styles/StyleUtils';
 
-import { Musics } from "./views/Musics";
-import { Playlists } from "./views/Playlists";
+import { Musics } from './views/Musics';
+import { Playlists } from './views/Playlists';
+import { Playlist } from './views/Playlist';
 
 const StyledApp = styled.div`
   display: inline-block;
