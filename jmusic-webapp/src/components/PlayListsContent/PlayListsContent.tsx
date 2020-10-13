@@ -36,6 +36,7 @@ export const PlayListsContent: React.FC<PlaylistProps> = ({ playlists, loading }
         <List 
           data={playlists}
           render={renderMusicList}
+          loading={loading}
         />
       </Box>
     </Content>

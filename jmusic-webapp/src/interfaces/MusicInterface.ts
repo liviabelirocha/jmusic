@@ -7,6 +7,13 @@ export interface MusicObject {
 }
 
 export interface MusicListProps {
-  musicType?: string,
-  musics?: MusicObject[],
+  type: string,
+  musics: MusicObject[],
+}
+
+export type MusicTuple = [string, MusicObject[]]; 
+
+export interface MusicsContentProps {
+  musics: MusicTuple[],
+  loading: boolean;
 }

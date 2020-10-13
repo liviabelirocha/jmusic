@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { hFlexDisplay } from '../../styles/StyleUtils';
+import { List } from '../UI/List/List';
 
 export const StyledMusicListContent = styled.div`
   h3 {
@@ -10,9 +11,11 @@ export const StyledMusicListContent = styled.div`
   }
 `;
 
-export const StyledMusicList = styled.ul`
-  margin: 20px 20px;
-  padding-left: 10px;
+export const StyledMusicList = styled(List)`
+  ul {
+    margin: 20px 20px;
+    padding-left: 10px;
+  }
 `;
 
 export const StyledMusicItem = styled.li`

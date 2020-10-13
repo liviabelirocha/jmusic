@@ -5,4 +5,8 @@ export const StyledContent = styled.div`
   width: calc(100vw - 30px);
   padding-top: 20px;
   padding-left: 50px;
+  padding-bottom: 50px;
+
+  max-height: 95vh;
+  overflow-y: auto;
 `;

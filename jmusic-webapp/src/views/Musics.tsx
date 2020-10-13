@@ -1,20 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react';
 
-import { Header, Content, Box } from '../components/UI';
-import { AddButton } from '../components/AddButton/AddButton';
-import { MusicList } from '../components/MusicList/MusicList';
+import { MusicsContent } from '../components/MusicsContent/MusicsContent';
+import { getAllMusic } from '../services/musicService';
+
+import { MusicObject, MusicTuple } from '../interfaces/MusicInterface';
 
 export const Musics = () => {
-  return (
-    <Content>
-      <Header 
-        title="Músicas"
-        button={<AddButton text="música" />}
-      />
+  const [musics, setMusics] = useState<MusicTuple[]>([]);
+  const [loading, setLoading] = useState(false);
 
-      <Box>
-        <MusicList musicType="Rock" />
-      </Box>
-    </Content>
-  );
+  const mapMusics = useCallback((musics) => {
+    function transformMusics(map: Map<String, MusicObject[]>, cur: MusicObject) {
+      const { style } = cur;
+
+      if (map.has(style)) {
+        map.get(style)?.push(cur);
+      } else {
+        map.set(style, [ cur ]);
+      }
+
+      return map;
+    }
+
+    const mapEntries = musics
+      .reduce(transformMusics, new Map())
+      .entries()
+
+    return Array.from(mapEntries) as MusicTuple[];
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    getAllMusic()
+      .then(res => res.data)
+      .then(musics => mapMusics(musics))
+      .then(musics => setMusics(musics))
+      .finally(() => setLoading(false));
+  }, [mapMusics]);
+
+  return <MusicsContent musics={musics} loading={loading} />
 }
