@@ -8,22 +8,25 @@ import StopIcon from "../../assets/svg/player/stop.svg";
 import SkipStartIcon from "../../assets/svg/player/skip_start.svg";
 import SkipEndIcon from "../../assets/svg/player/skip_end.svg";
 
+const Music1 = require("../../musics/m1.mp3");
+const Music2 = require("../../musics/m2.mp3");
+const Music3 = require("../../musics/m3.mp3");
+
 interface MusicPlayerProps {
-  songs: string[];
+  musics?: string[];
 }
 
-export const MusicPlayer: React.FC<MusicPlayerProps> = ({ songs }) => {
-  const [min, setMin] = useState(0);
+export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
   const [max, setMax] = useState(0);
-  const [value, setValue] = useState(1);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentSong, setCurrentSong] = useState(0);
   const [isPaused, setIsPaused] = useState(true);
   const [iniciou, setIniciou] = useState(false);
 
-  const audio = useRef<HTMLAudioElement>(null!);
+  let audio = useRef<HTMLAudioElement>(null!);
+  const songs = [Music1, Music2, Music3];
 
-  function pauseUpause() {
+  function pauseUnpause() {
     if (!isPaused) audio.current.pause();
     else play();
     setIsPaused(!isPaused);
@@ -33,52 +36,68 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ songs }) => {
     audio.current.play();
     audio.current.addEventListener("play", () => {
       if (!iniciou) {
-        setMax(audio.current.duration);
+        const duration = audio.current.duration;
+        setMax(duration);
         setIniciou(true);
       }
-      if (currentTime < max)
-        setInterval(() => {
-          setValue(audio.current.currentTime);
-        });
     });
   }
 
   function onSliderChange(value: number) {
     setCurrentTime(value);
-    audio.current.currentTime = value;
+  }
+
+  function changeTrack(option: number) {
+    let curr;
+    option === 0 ? (curr = currentSong - 1) : (curr = currentSong + 1);
+    if (curr < 0) curr = songs.length - 1;
+    else if (curr >= songs.length) curr = 0;
+    setCurrentSong(curr);
+  }
+
+  function stop() {
+    setCurrentTime(0);
+    setIniciou(false);
+    setIsPaused(true);
+    audio.current.pause();
+    audio.current.currentTime = 0;
   }
 
   useEffect(() => {
-    setValue(audio.current.currentTime);
-  }, []);
+    if (iniciou) {
+      if (currentTime < max)
+        setInterval(() => {
+          setCurrentTime(audio.current.currentTime);
+        });
+    }
+  }, [max, currentTime, iniciou]);
 
   return (
     <StyledMusicPlayer>
       <Icons>
-        <a>
+        <span onClick={() => changeTrack(0)}>
           <img src={SkipStartIcon} alt="skip to start" />
-        </a>
-        <a>
+        </span>
+        <span onClick={stop}>
           <img src={StopIcon} alt="stop song" />
-        </a>
-        <a>
+        </span>
+        <span>
           <img
             src={isPaused ? PlayIcon : PauseIcon}
             alt="play song"
-            onClick={pauseUpause}
+            onClick={pauseUnpause}
           />
-        </a>
-        <a>
+        </span>
+        <span onClick={() => changeTrack(1)}>
           <img src={SkipEndIcon} alt="skip to end" />
-        </a>
+        </span>
       </Icons>
       <Track>
         <input
           type="range"
-          min={min}
           max={max}
-          value={value}
-          onChange={() => onSliderChange(value)}
+          value={currentTime}
+          onChange={() => onSliderChange(currentTime)}
         />
         <audio ref={audio}>
           <source src={songs[currentSong]} />

@@ -1,14 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { Content, Header, Box, Loading } from '../UI';
-import { MusicsContentProps } from '../../interfaces/MusicInterface';
-import { MusicList } from '../MusicList/MusicList';
+import { Content, Header, Box, Loading } from "../UI";
+import { MusicsContentProps } from "../../interfaces/MusicInterface";
+import { MusicList } from "../MusicList/MusicList";
+import { MusicPlayer } from "../MusicPlayer/MusicPlayer";
 
-export const MusicsContent: React.FC<MusicsContentProps> = ({ musics, loading }) => {
-
+export const MusicsContent: React.FC<MusicsContentProps> = ({
+  musics,
+  loading,
+}) => {
   function renderMusics() {
     if (loading) {
-      return <Loading />
+      return <Loading />;
     }
 
     return musics.map(([style, musics]) => (
@@ -18,13 +21,11 @@ export const MusicsContent: React.FC<MusicsContentProps> = ({ musics, loading })
 
   return (
     <Content>
-      <Header
-        title="Músicas"
-      />
+      <Header title="Músicas" />
 
-      <Box>
-        { renderMusics() }
-      </Box>
+      <Box>{renderMusics()}</Box>
+
+      <MusicPlayer />
     </Content>
-  )
-}
+  );
+};

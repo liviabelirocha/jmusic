@@ -1,31 +1,28 @@
-import React from 'react';
+import React from "react";
 
-import { MusicItem } from '../MusicList/MusicItem';
-import { Content, Header, Box, List, Loading } from '../UI';
-import { PlaylistHeaderInfo } from '../PlaylistHeaderInfo/PlaylistHeaderInfo';
+import { MusicItem } from "../MusicList/MusicItem";
+import { Content, Header, Box, List, Loading } from "../UI";
+import { PlaylistHeaderInfo } from "../PlaylistHeaderInfo/PlaylistHeaderInfo";
 
-import { PlaylistMusicsProps } from '../../interfaces/PlaylistInterface';
-import { MusicObject } from '../../interfaces/MusicInterface';
+import { PlaylistMusicsProps } from "../../interfaces/PlaylistInterface";
+import { MusicObject } from "../../interfaces/MusicInterface";
+import { MusicPlayer } from "../MusicPlayer/MusicPlayer";
 
 export const PlaylistMusicsContent: React.FC<PlaylistMusicsProps> = ({
   playlist,
   musics,
   loadingPlaylist,
-  loadingMusics
+  loadingMusics,
 }) => {
-
   function renderMusicItems(music: MusicObject) {
     return (
-      <MusicItem
-        key={music.id}
-        name={`${music.name} - ${music.author}`}
-      />
+      <MusicItem key={music.id} name={`${music.name} - ${music.author}`} />
     );
   }
 
   function renderHeader() {
     if (loadingPlaylist) {
-      return <Loading />
+      return <Loading />;
     }
 
     if (playlist) {
@@ -36,7 +33,7 @@ export const PlaylistMusicsContent: React.FC<PlaylistMusicsProps> = ({
             <PlaylistHeaderInfo
               createdBy={playlist.createdBy}
               amountOfMusics={playlist.musics.length}
-              duration={'00h'}
+              duration={"00h"}
             />
           }
         />
@@ -49,12 +46,10 @@ export const PlaylistMusicsContent: React.FC<PlaylistMusicsProps> = ({
       {renderHeader()}
 
       <Box>
-        <List
-          data={musics}
-          render={renderMusicItems}
-          loading={loadingMusics}
-        />
+        <List data={musics} render={renderMusicItems} loading={loadingMusics} />
       </Box>
+
+      <MusicPlayer />
     </Content>
   );
-}
+};
