@@ -3,9 +3,17 @@ package com.app.jmusic.servicesImpl;
 import com.app.jmusic.models.Music;
 import com.app.jmusic.repositories.MusicRepository;
 import com.app.jmusic.servicesApi.MusicService;
+import com.mongodb.client.gridfs.model.GridFSFile;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.gridfs.GridFsOperations;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,10 +22,17 @@ import java.util.Optional;
 public class MusicServiceImpl implements MusicService<String, Music> {
   @Autowired
   private MusicRepository musicRepository;
+  @Autowired
+  private GridFsTemplate gridFsTemplate;
+  @Autowired
+  private GridFsOperations gridFsOperations;
 
   @Override
-  public Music insertMusic(Music music) throws Exception {
-    return musicRepository.save(music);
+  public Music insertMusic(Music music, MultipartFile file) throws Exception {
+      String id = insertMusicFile(file);
+      music.setId(id);
+
+      return insertMusicContent(music);
   };
 
   @Override
@@ -46,6 +61,16 @@ public class MusicServiceImpl implements MusicService<String, Music> {
     return musics;
   }
 
+  @Override
+  public InputStream getMusicFile(String musicId) throws Exception {
+    GridFSFile file = gridFsTemplate.findOne(new Query(Criteria.where("_id").is(musicId)));
+
+    if (file != null) {
+      return gridFsOperations.getResource(file).getInputStream();
+    }
+
+    return null;
+  }
 
   @Override
   public Music updateMusic(Music music) throws Exception {
@@ -65,5 +90,15 @@ public class MusicServiceImpl implements MusicService<String, Music> {
     musicRepository.deleteById(musicId);
     return someMusic;
   };
+
+  private Music insertMusicContent(Music music) throws Exception {
+    return musicRepository.save(music);
+  }
+
+  private String insertMusicFile(MultipartFile file) throws Exception {
+    ObjectId id = gridFsTemplate.store(file.getInputStream(), file.getName(), file.getContentType());
+
+    return id.toString();
+  }
 
 }
