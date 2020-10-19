@@ -20,4 +20,12 @@ public class Playlist {
   private double duration;
   private Date creationDate;
   private List<String> musics;
+
+  public List<String> getMusics() {
+    return musics;
+  }
+
+  public void setMusics(List<String> musics) {
+    this.musics = musics;
+  }
 }

@@ -1,7 +1,9 @@
 package com.app.jmusic.servicesImpl;
 
 import com.app.jmusic.models.Music;
+import com.app.jmusic.models.Playlist;
 import com.app.jmusic.repositories.MusicRepository;
+import com.app.jmusic.repositories.PlaylistRepository;
 import com.app.jmusic.servicesApi.MusicService;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import org.bson.types.ObjectId;
@@ -27,6 +29,9 @@ public class MusicServiceImpl implements MusicService<String, Music> {
   @Autowired
   private GridFsOperations gridFsOperations;
 
+  @Autowired
+  private PlaylistRepository playlistRepository;
+
   @Override
   public Music insertMusic(Music music, MultipartFile file) throws Exception {
       String id = insertMusicFile(file);
@@ -44,12 +49,12 @@ public class MusicServiceImpl implements MusicService<String, Music> {
     }
 
     return music.get();
-  };
+  }
 
   @Override
   public List<Music> getMusic() throws Exception {
     return musicRepository.findAll();
-  };
+  }
 
   @Override
   public List<Music> getMusics(List<String> musicIds) throws Exception {
@@ -85,11 +90,21 @@ public class MusicServiceImpl implements MusicService<String, Music> {
       return null;
     }
 
+    List<Playlist> playlists = playlistRepository.findAll();
+    for (Playlist playlist:playlists) {
+      List<String> musics = playlist.getMusics();
+      if (musics.contains(musicId)){
+        musics.remove(musicId);
+        playlist.setMusics(musics);
+      }
+      playlistRepository.save(playlist);
+    }
+
     Music someMusic = music.get();
 
     musicRepository.deleteById(musicId);
     return someMusic;
-  };
+  }
 
   private Music insertMusicContent(Music music) throws Exception {
     return musicRepository.save(music);
@@ -100,5 +115,4 @@ public class MusicServiceImpl implements MusicService<String, Music> {
 
     return id.toString();
   }
-
 }
