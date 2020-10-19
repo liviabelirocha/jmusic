@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import { StyledMusicPlayer, Icons, Track } from "./Style";
+import { StyledMusicPlayer, Icons, StyledTrack } from "./Style";
 
 import PlayIcon from "../../assets/svg/player/play.svg";
 import PauseIcon from "../../assets/svg/player/pause.svg";
@@ -92,7 +92,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
           <img src={SkipEndIcon} alt="skip to end" />
         </span>
       </Icons>
-      <Track>
+      <StyledTrack>
         <input
           type="range"
           max={max}
@@ -102,7 +102,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
         <audio ref={audio}>
           <source src={songs[currentSong]} />
         </audio>
-      </Track>
+      </StyledTrack>
     </StyledMusicPlayer>
   );
 };

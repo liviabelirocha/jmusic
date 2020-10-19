@@ -23,7 +23,7 @@ export const Icons = styled.div`
   }
 `;
 
-export const Track = styled.div`
+export const StyledTrack = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -31,22 +31,26 @@ export const Track = styled.div`
   input {
     margin: 1rem 2rem;
     width: 100%;
+    height: 5px;
+    border-radius: 10px;
+    
     -webkit-appearance: none;
     appearance: none;
-    height: 15px;
     outline: none;
     opacity: 0.7;
+    
     -webkit-transition: 0.2s;
     transition: opacity 0.2s;
     background: #fff;
+
 
     :hover {
       opacity: 1;
     }
 
     ::-moz-range-thumb {
-      width: 25px;
-      height: 25px;
+      width: 15px;
+      height: 15px;
       background: #39ff;
       cursor: pointer;
       border-radius: 50%;
