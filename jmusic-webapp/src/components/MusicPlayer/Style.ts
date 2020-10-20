@@ -9,18 +9,14 @@ export const StyledMusicPlayer = styled.div`
   bottom: 0;
   right: 0;
   width: 100%;
-  height: 164px;
+  height: 110px;
   box-shadow: 0 -5px 5px -5px #000;
 `;
 
-export const Icons = styled.div`
+export const StyledControl = styled.div`
   display: flex;
   align-items: center;
   margin-top: 2rem;
-
-  span {
-    margin-left: 1em;
-  }
 `;
 
 export const StyledTrack = styled.div`

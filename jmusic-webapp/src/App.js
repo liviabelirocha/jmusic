@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import styled from "styled-components";
 import {
   HashRouter as Router,
@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import { Menu } from './components/Menu/Menu';
+import { MusicPlayer } from './components/MusicPlayer/MusicPlayer';
 import { hFlexDisplay } from './styles/StyleUtils';
 
 import { Musics } from './views/Musics';
@@ -21,6 +22,10 @@ const StyledApp = styled.div`
 `;
 
 export default function App() {
+  const [musics, dispatch] = useReducer((state, action) => {
+    
+  }, []);
+
   return (
     <StyledApp className="App">
       <Router>
@@ -44,6 +49,8 @@ export default function App() {
             </Route>
           </Switch>
         </Router>
+
+        <MusicPlayer />
       </Router>
     </StyledApp>
   );

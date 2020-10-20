@@ -6,7 +6,6 @@ import { PlaylistHeaderInfo } from "../PlaylistHeaderInfo/PlaylistHeaderInfo";
 
 import { PlaylistMusicsProps } from "../../interfaces/PlaylistInterface";
 import { MusicObject } from "../../interfaces/MusicInterface";
-import { MusicPlayer } from "../MusicPlayer/MusicPlayer";
 
 export const PlaylistMusicsContent: React.FC<PlaylistMusicsProps> = ({
   playlist,
@@ -48,8 +47,6 @@ export const PlaylistMusicsContent: React.FC<PlaylistMusicsProps> = ({
       <Box>
         <List data={musics} render={renderMusicItems} loading={loadingMusics} />
       </Box>
-
-      <MusicPlayer />
     </Content>
   );
 };

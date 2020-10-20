@@ -3,7 +3,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Header, Content, Box, List } from "../UI";
 import { MusicItem } from "../MusicList/MusicItem";
-import { MusicPlayer } from "../MusicPlayer/MusicPlayer";
 
 import {
   PlaylistProps,
@@ -39,8 +38,6 @@ export const PlayListsContent: React.FC<PlaylistProps> = ({
       <Box>
         <List data={playlists} render={renderMusicList} loading={loading} />
       </Box>
-
-      <MusicPlayer />
     </Content>
   );
 };

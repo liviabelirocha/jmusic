@@ -15,8 +15,6 @@ public class JmusicApplication {
 
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
-		// response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-
 
 		return new WebMvcConfigurer() {
 			@Override
