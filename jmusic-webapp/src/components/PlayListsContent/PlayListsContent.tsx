@@ -49,11 +49,12 @@ export const PlayListsContent: React.FC<PlaylistProps> = ({
     await postPlaylist(data)
       .then((res) => {
         console.log(res.data);
+        setCreating(false);
+        setIsModalVisible(false);
+        history.push(`playlist/${res.data.id}`);
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
         setCreating(false);
         setIsModalVisible(false);
       });

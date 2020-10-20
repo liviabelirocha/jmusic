@@ -16,8 +16,6 @@ export function getAllPlaylist() {
 }
 
 export function postPlaylist(playlist: Playlist) {
-  console.log(playlist);
-
   return api.post("/playlist", playlist);
 }
 
