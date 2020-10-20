@@ -13,7 +13,7 @@ export const PlaylistHeaderInfo: React.FC<PlaylistHeaderInfoProps> = ({
     <PlaylistHeaderInfoStyled>
       <p>
         <span>Criado por: {createdBy}</span>
-        <span>Duração: {duration}</span>  
+        {/* <span>Duração: {duration}</span> */}
       </p>
 
       <p>Total de músicas: {amountOfMusics}</p>

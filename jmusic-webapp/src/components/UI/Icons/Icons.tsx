@@ -47,7 +47,7 @@ export const Stop: React.FC<IconProps> = ({ onClick }) => {
   return (
     <StyledIconContent onClick={onClick}>
       <svg viewBox="0 0 320 320">
-        <path 
+        <path
           className="jmusic-icon"
           d="M53.3,0h213.3C296.1,0,320,23.9,320,53.3v213.3c0,29.5-23.9,53.3-53.3,53.3H53.3C23.9,320,0,296.1,0,266.7V53.3 C0,23.9,23.9,0,53.3,0z"
         />
@@ -82,5 +82,31 @@ export const Skip: React.FC<SkipProps> = ({ onClick, start = false }) => {
         />
       </svg>
     </StyledIconContent >
+  );
+};
+
+export const Trash: React.FC<IconProps> = ({ onClick }) => {
+  return (
+    <StyledIconContent onClick={onClick}>
+      <svg viewBox="0 0 512 512">
+        <path
+          className="jmusic-icon"
+          d="M469.333,85.333h-42.667h-64v-64C362.667,9.557,353.131,0,341.333,0H170.667c-11.797,0-21.333,9.557-21.333,21.333v64h-64 H42.667c-11.797,0-21.333,9.557-21.333,21.333S30.869,128,42.667,128H64v320c0,35.285,28.715,64,64,64h256 c35.285,0,64-28.715,64-64V128h21.333c11.797,0,21.333-9.557,21.333-21.333S481.131,85.333,469.333,85.333z M192,42.667h128 v42.667H192V42.667z M405.333,448c0,11.755-9.557,21.333-21.333,21.333H128c-11.776,0-21.333-9.579-21.333-21.333V128h64h170.667 h64V448z"
+        />
+      </svg>
+    </StyledIconContent>
+  );
+};
+
+export const Add: React.FC<IconProps> = ({ onClick }) => {
+  return (
+    <StyledIconContent onClick={onClick}>
+      <svg viewBox="0 0 448 448">
+        <path 
+          className="jmusic-icon"
+          d="m408 184h-136c-4.417969 0-8-3.582031-8-8v-136c0-22.089844-17.910156-40-40-40s-40 17.910156-40 40v136c0 4.417969-3.582031 8-8 8h-136c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40h136c4.417969 0 8 3.582031 8 8v136c0 22.089844 17.910156 40 40 40s40-17.910156 40-40v-136c0-4.417969 3.582031-8 8-8h136c22.089844 0 40-17.910156 40-40s-17.910156-40-40-40zm0 0"
+        />
+      </svg>
+    </StyledIconContent>
   );
 };

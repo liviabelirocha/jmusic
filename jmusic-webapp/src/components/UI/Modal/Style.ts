@@ -10,6 +10,8 @@ export const Backdrop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  z-index: 2000;
 `;
 
 export const Container = styled.div`
@@ -22,7 +24,6 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 4rem;
   border-radius: 0.8rem;
-  font-size: 24px;
 
   form {
     display: flex;

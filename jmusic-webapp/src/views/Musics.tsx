@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
 import { MusicsContent } from '../components/MusicsContent/MusicsContent';
-import { getAllMusic } from '../services/musicService';
+import { getAllMusic, deleteMusic } from '../services/musicService';
 
 import { MusicObject, MusicTuple } from '../interfaces/MusicInterface';
 
@@ -38,5 +38,22 @@ export const Musics = () => {
       .finally(() => setLoading(false));
   }, [mapMusics]);
 
-  return <MusicsContent musics={musics} loading={loading} />
+  function handleDelete(musicId: string) {
+    deleteMusic(musicId)
+      .then(res => res.data)
+      .then(data => {
+        const newMusics = musics
+          .map(([style, music]) => [style, music.filter(m => m.id !== data.id)] as MusicTuple)
+
+        setMusics(newMusics);
+      });
+  }
+
+  return (
+    <MusicsContent
+      musics={musics}
+      loading={loading}
+      onDelete={handleDelete}  
+    />
+  );
 }

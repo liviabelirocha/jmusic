@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { PlayListsContent } from '../components/PlayListsContent/PlayListsContent';
 
-import { getAllPlaylist } from '../services/playlistService';
+import { getAllPlaylist, deletePlaylist } from '../services/playlistService';
+
+import { PlaylistObject } from '../interfaces/PlaylistInterface';
 
 export const Playlists = () => {
   const [loading, setLoading] = useState(false);
-  const [playlists, setPlaylists] = useState<any>([]);
+  const [playlists, setPlaylists] = useState<PlaylistObject[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -14,6 +16,22 @@ export const Playlists = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  function handleDelete(playlistId: string) {
+    deletePlaylist(playlistId)
+      .then(res => res.data)
+      .then(data => {
+        const newPlaylists = playlists.filter(playlist => playlist.id !== data.id);
 
-  return <PlayListsContent playlists={playlists} loading={loading} />
+        setPlaylists(newPlaylists);
+      })
+  }
+
+
+  return (
+    <PlayListsContent
+      playlists={playlists}
+      loading={loading} 
+      onDelete={handleDelete}
+    />
+  );
 }

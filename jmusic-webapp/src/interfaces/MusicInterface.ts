@@ -7,13 +7,16 @@ export interface MusicObject {
 }
 
 export interface MusicListProps {
-  type: string,
-  musics: MusicObject[],
+  type: string;
+  musics: MusicObject[];
+  onDelete?: (id: string) => void;
+  onAdd?: (id: string) => void;
 }
 
 export type MusicTuple = [string, MusicObject[]]; 
 
 export interface MusicsContentProps {
-  musics: MusicTuple[],
+  musics: MusicTuple[];
   loading: boolean;
+  onDelete?: (id: string) => void;
 }

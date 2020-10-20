@@ -33,6 +33,8 @@ export default function App() {
     }
   }, []);
 
+  console.log(musics);
+
   return (
     <StyledApp className="App">
       <Router>
@@ -58,7 +60,9 @@ export default function App() {
             </Switch>
           </Router>
         </MusicContext.Provider>
-        <MusicPlayer />
+
+        <MusicPlayer musics={musics} />
+
       </Router>
     </StyledApp>
   );

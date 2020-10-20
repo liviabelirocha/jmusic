@@ -41,6 +41,8 @@ export const StyledMusicItem = styled.li`
   & .extras {
     position: absolute;
     right: 20px;
+
+    ${hFlexDisplay('flex-start', 'center')}
   }
 
 

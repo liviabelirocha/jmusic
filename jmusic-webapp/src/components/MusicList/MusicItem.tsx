@@ -16,7 +16,6 @@ export const MusicItem: React.FC<MusicItemProps> = ({ name, controller = true, e
       { controller && <Play onClick={onClick} />}
       <p className="name">{ name }</p>
       <div className="extras">
-        <p className="time">00:00</p>
         { (extras || []).map(extra => extra) }
       </div>
     </StyledMusicItem>

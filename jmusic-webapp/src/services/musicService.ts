@@ -31,6 +31,11 @@ export function getAllMusic() {
   return api.get("/music/all");
 }
 
+export function getMusicFile(musicId: string) {
+  return api.get(`/music/file/${musicId}`);
+}
+
+
 export function postMusic(music: Music, file: File) {
   const data = new FormData();
   data.append("music", JSON.stringify(music));
@@ -49,3 +54,4 @@ export function patchMusic(music: Music) {
 export function deleteMusic(musicId: string) {
   return api.delete(`/music/${musicId}`);
 }
+

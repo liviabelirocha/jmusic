@@ -1,11 +1,8 @@
 import api from "./api";
 
-interface Playlist {
-  name: string;
-  createdBy: string;
-  creationDate: Date;
-  musics: String[];
-}
+import { PlaylistObject, PlaylistView } from '../interfaces/PlaylistInterface';
+
+
 
 export function getPlaylist(playlistId: string) {
   return api.get(`/playlist/${playlistId}`);
@@ -15,11 +12,11 @@ export function getAllPlaylist() {
   return api.get("/playlist/all");
 }
 
-export function postPlaylist(playlist: Playlist) {
+export function postPlaylist(playlist: PlaylistView) {
   return api.post("/playlist", playlist);
 }
 
-export function patchPlaylist(playlist: Playlist) {
+export function patchPlaylist(playlist: PlaylistObject) {
   return api.patch("/playlist", playlist);
 }
 

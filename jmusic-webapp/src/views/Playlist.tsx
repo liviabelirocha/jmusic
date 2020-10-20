@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { PlaylistMusicsContent } from '../components/PlaylistMusicsContent/PlaylistMusicsContent';
 
-import { getPlaylist } from '../services/playlistService';
+import { getPlaylist, patchPlaylist } from '../services/playlistService';
 import { getMusicsByIds } from '../services/musicService';
 
 import { PlaylistObject } from '../interfaces/PlaylistInterface';
@@ -39,7 +39,17 @@ export const Playlist = () => {
         .then(musics => setMusics(musics.data))
         .finally(() => setLoadingMusics(false));
     }
-  }, [playlist])
+  }, [playlist]);
+
+  function handleDelete(musicId: string) {
+    const newPlaylist = {
+      ...playlist,
+      musics: (playlist?.musics || []).filter(music => music !== musicId)
+    } as PlaylistObject;
+
+    patchPlaylist(newPlaylist)
+      .then(() => setPlaylist(newPlaylist));
+  }
 
 
   return (
@@ -48,6 +58,7 @@ export const Playlist = () => {
       loadingPlaylist={loading}
       musics={musics}
       loadingMusics={loadingMusics}
+      onDelete={handleDelete}
     />
   );
 }

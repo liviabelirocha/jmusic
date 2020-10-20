@@ -1,26 +1,28 @@
 import React, { useState, useRef } from "react";
 
 import { StyledMusicPlayer, StyledControl, StyledTrack } from "./Style";
-import { Play, Pause, Stop, Skip } from '../UI/index'
+import { Play, Pause, Stop, Skip } from '../UI/index';
+
+import { getMusicFile } from '../../services/musicService';
 
 const Music1 = require("../../musics/m1.mp3");
 const Music2 = require("../../musics/m2.mp3");
 const Music3 = require("../../musics/m3.mp3");
 
 interface MusicPlayerProps {
-  musics?: string[];
+  musics: string[];
 }
 
 export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [isPaused, setIsPaused] = useState(true);
-
   const [songNumber, setSongNumber] = useState(0);
 
   const audio = useRef<HTMLAudioElement>(null!);
 
-  const songs = [Music1, Music2, Music3];
+  const songs = musics.map(musicId => `http://localhost:8080/music/file/${musicId}`)
+
 
   function changeMusic(songNumber: number, target: HTMLAudioElement, play: boolean = true) {
     setSongNumber(songNumber);
@@ -29,7 +31,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
     if (play) {
       target.play();
     }
-  } 
+  }
 
   function handleTimeUpdate(event: React.SyntheticEvent) {
     event.preventDefault();
@@ -58,8 +60,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
 
     const target = event.currentTarget as HTMLAudioElement;
 
-    console.log(target.duration);
     
+    console.log(target.duration);
     setDuration(target.duration);
     setCurrentTime(target.currentTime);
   }
@@ -129,40 +131,15 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
     }
   }
 
-  // function stop() {
-  //   setCurrentTime(0);
-  //   setIsPaused(true);
-  //   audio.current.pause();
-  //   audio.current.currentTime = 0;
-  // }
-
   return (
     <StyledMusicPlayer>
       <StyledControl>
         <Skip onClick={back} start />
         <Stop onClick={stop} />
-        { isPaused ? <Play onClick={play} /> : <Pause onClick={pause} /> }
+        {isPaused ? <Play onClick={play} /> : <Pause onClick={pause} />}
         <Skip onClick={go} />
       </StyledControl>
 
-      {/* <Icons>
-        <span onClick={() => changeTrack(0)}>
-          <img src={SkipStartIcon} alt="skip to start" />
-        </span>
-        <span onClick={stop}>
-          <img src={StopIcon} alt="stop song" />
-        </span>
-        <span>
-          <img
-            src={isPaused ? PlayIcon : PauseIcon}
-            alt="play song"
-            onClick={playAndPause}
-          />
-        </span>
-        <span onClick={() => changeTrack(1)}>
-          <img src={SkipEndIcon} alt="skip to end" />
-        </span>
-      </Icons> */}
       <StyledTrack>
         <input
           type="range"
@@ -173,8 +150,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
         />
         <audio
           ref={audio}
+          preload="all"
           onTimeUpdate={handleTimeUpdate}
-          onCanPlay={handleStartMusic}
+          onCanPlayThrough={handleStartMusic}
           onEnded={handleEndMusic}
         >
           <source src={songs[songNumber]} />

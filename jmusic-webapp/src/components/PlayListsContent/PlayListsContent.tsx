@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useHistory } from "react-router-dom";
-import { Header, Content, Box, List, Modal } from "../UI";
+import { Header, Content, Box, List, Modal, Trash } from "../UI";
 import { MusicItem } from "../MusicList/MusicItem";
 import { AddButton } from "../AddButton/AddButton";
 
@@ -15,6 +15,7 @@ import { postPlaylist } from "../../services/playlistService";
 export const PlayListsContent: React.FC<PlaylistProps> = ({
   playlists,
   loading,
+  onDelete,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [name, setName] = useState("");
@@ -27,17 +28,26 @@ export const PlayListsContent: React.FC<PlaylistProps> = ({
     history.push(`playlist/${playlistId}`);
   }
 
+  function handleDelete(playlistId: string) {
+    if (onDelete) {
+      onDelete(playlistId)
+    }
+  }
+
   function renderMusicList(playlist: PlaylistObject) {
     return (
       <MusicItem
         key={playlist.id}
         name={playlist.name}
         onClick={(e) => pushToPlaylist(playlist.id)}
+        extras={[
+          <Trash key={`trash${playlist.id}`} onClick={() => handleDelete(playlist.id)} />
+        ]}
       />
     );
   }
 
-  async function handleSubmit() {
+  function handleSubmit() {
     const data = {
       name,
       createdBy,
@@ -46,7 +56,7 @@ export const PlayListsContent: React.FC<PlaylistProps> = ({
     };
 
     setCreating(true);
-    await postPlaylist(data)
+    postPlaylist(data)
       .then((res) => {
         console.log(res.data);
         setCreating(false);
@@ -78,31 +88,30 @@ export const PlayListsContent: React.FC<PlaylistProps> = ({
       <Box>
         <List data={playlists} render={renderMusicList} loading={loading} />
 
-        {isModalVisible && (
-          <Modal
-            title="Adicionar Playlist"
-            onCancel={() => setIsModalVisible(false)}
-            onSubmit={handleSubmit}
-            loading={creating}
-          >
-            <label>
-              Nome:
+        <Modal
+          title="Adicionar Playlist"
+          visible={isModalVisible}
+          onCancel={() => setIsModalVisible(false)}
+          onSubmit={handleSubmit}
+          loading={creating}
+        >
+          <label>
+            Nome:
               <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </label>
-            <label>
-              Criador:
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <label>
+            Criador:
               <input
-                type="text"
-                value={createdBy}
-                onChange={(e) => setCreatedBy(e.target.value)}
-              />
-            </label>
-          </Modal>
-        )}
+              type="text"
+              value={createdBy}
+              onChange={(e) => setCreatedBy(e.target.value)}
+            />
+          </label>
+        </Modal>
       </Box>
     </Content>
   );

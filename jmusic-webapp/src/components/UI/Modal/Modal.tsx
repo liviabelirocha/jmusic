@@ -5,22 +5,35 @@ import { Loading } from "../";
 
 interface ModalInterface {
   title: string;
+  visible: boolean;
   onCancel?: (e: React.MouseEvent) => void;
   onSubmit?: (e: React.MouseEvent) => void;
   loading?: boolean;
 }
 
-export const Modal: React.FC<ModalInterface> = (props) => {
+export const Modal: React.FC<ModalInterface> = ({
+  title,
+  visible = false,
+  onCancel,
+  onSubmit,
+  loading,
+  children,
+}) => {
+  
+  if (!visible) {
+    return null;
+  }
+  
   return (
     <Backdrop>
       <Container>
-        <h2>{props.title}</h2>
+        <h2>{title}</h2>
 
-        <form>{props.loading ? <Loading /> : props.children}</form>
+        { loading ? <Loading /> : <form>{children}</form> }
 
         <Actions>
-          <button onClick={props.onCancel}>Cancelar</button>
-          <button onClick={props.onSubmit}>Adicionar</button>
+          <button onClick={onCancel}>Cancelar</button>
+          <button onClick={onSubmit}>Adicionar</button>
         </Actions>
       </Container>
     </Backdrop>

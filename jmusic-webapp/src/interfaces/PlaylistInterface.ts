@@ -1,5 +1,12 @@
 import { MusicObject } from './MusicInterface';
 
+export interface PlaylistView {
+  name: string;
+  createdBy: string;
+  creationDate: Date;
+  musics: String[];
+}
+
 export interface PlaylistObject {
   id: string;
   name: string;
@@ -11,6 +18,7 @@ export interface PlaylistObject {
 export interface PlaylistProps {
   playlists: PlaylistObject[];
   loading: boolean;
+  onDelete?: (id: string) => void
 }
 
 export interface PlaylistHeaderInfoProps { 
@@ -24,4 +32,5 @@ export interface PlaylistMusicsProps {
   musics: MusicObject[];
   loadingPlaylist: boolean;
   loadingMusics: boolean;
+  onDelete?: (id: string) => void;
 }

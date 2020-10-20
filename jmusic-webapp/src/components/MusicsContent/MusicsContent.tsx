@@ -10,6 +10,7 @@ import { postMusic } from "../../services/musicService";
 export const MusicsContent: React.FC<MusicsContentProps> = ({
   musics,
   loading,
+  onDelete,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [file, setFile] = useState<File>();
@@ -24,7 +25,12 @@ export const MusicsContent: React.FC<MusicsContentProps> = ({
     }
 
     return musics.map(([style, musics]) => (
-      <MusicList key={style} type={style} musics={musics} />
+      <MusicList
+        key={style}
+        type={style}
+        musics={musics}
+        onDelete={onDelete}
+      />
     ));
   }
 
@@ -33,24 +39,17 @@ export const MusicsContent: React.FC<MusicsContentProps> = ({
     setFile(e.target.files[0]);
   }
 
-  async function handleSubmit() {
+  function handleSubmit() {
     if (!file) return;
     const data = {
-      music: {
-        name,
-        author,
-        style,
-      },
+      music: { name, author, style },
       file,
     };
+
     setSending(true);
-    await postMusic(data.music, data.file)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    postMusic(data.music, data.file)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err))
       .finally(() => {
         setSending(false);
         setIsModalVisible(false);
@@ -71,49 +70,48 @@ export const MusicsContent: React.FC<MusicsContentProps> = ({
 
       <Box>
         {renderMusics()}
-        {isModalVisible && (
-          <Modal
-            title="Adicionar Música"
-            onCancel={() => setIsModalVisible(false)}
-            onSubmit={handleSubmit}
-            loading={sending}
-          >
-            <label className="fileInput">
-              Music:
+        <Modal
+          title="Adicionar Música"
+          visible={isModalVisible}
+          onCancel={() => setIsModalVisible(false)}
+          onSubmit={handleSubmit}
+          loading={sending}
+        >
+          <label className="fileInput">
+            Music:
               <span>{file?.name || "..."}</span>
-              <input type="file" onChange={handleFiles} />
-            </label>
+            <input type="file" onChange={handleFiles} />
+          </label>
 
-            <label>
-              Nome:
+          <label>
+            Nome:
               <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </label>
-            <label>
-              Autor:
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <label>
+            Autor:
               <input
-                type="text"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-              />
-            </label>
-            <label>
-              Estilo:
+              type="text"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+            />
+          </label>
+          <label>
+            Estilo:
               <select onChange={(e) => setStyle(e.target.value)} value={style}>
-                <option value="" hidden>
-                  Selecione um estilo
+              <option value="" hidden>
+                Selecione um estilo
                 </option>
-                <option value="pop">Pop</option>
-                <option value="rock">Rock</option>
-                <option value="classica">Clássica</option>
-                <option value="mpb">MPB</option>
-              </select>
-            </label>
-          </Modal>
-        )}
+              <option value="pop">Pop</option>
+              <option value="rock">Rock</option>
+              <option value="classica">Clássica</option>
+              <option value="mpb">MPB</option>
+            </select>
+          </label>
+        </Modal>
       </Box>
     </Content>
   );

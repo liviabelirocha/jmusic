@@ -23,7 +23,7 @@ public class JmusicApplication {
 								.addMapping("/**")
 								.allowedOrigins("*")
 								.maxAge(3600)
-								.allowedMethods("POST", "GET", "OPTIONS", "DELETE")
+								.allowedMethods("POST", "GET", "OPTIONS", "DELETE", "PATCH")
 								.allowCredentials(true)
 								.allowedHeaders("*");
 
