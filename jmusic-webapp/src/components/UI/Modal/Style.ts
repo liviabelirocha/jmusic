@@ -48,7 +48,8 @@ export const Container = styled.div`
     }
 
     input,
-    .fileInput span {
+    .fileInput span,
+    select {
       position: relative;
       max-width: 850px;
       color: #fff;

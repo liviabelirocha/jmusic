@@ -1,20 +1,22 @@
 import React from "react";
 
 import { Backdrop, Container, Actions } from "./Style";
+import { Loading } from "../";
 
 interface ModalInterface {
   title: string;
   onCancel?: (e: React.MouseEvent) => void;
   onSubmit?: (e: React.MouseEvent) => void;
+  loading?: boolean;
 }
 
-const Modal: React.FC<ModalInterface> = (props) => {
+export const Modal: React.FC<ModalInterface> = (props) => {
   return (
     <Backdrop>
       <Container>
         <h2>{props.title}</h2>
 
-        <form>{props.children}</form>
+        <form>{props.loading ? <Loading /> : props.children}</form>
 
         <Actions>
           <button onClick={props.onCancel}>Cancelar</button>
@@ -24,5 +26,3 @@ const Modal: React.FC<ModalInterface> = (props) => {
     </Backdrop>
   );
 };
-
-export default Modal;
