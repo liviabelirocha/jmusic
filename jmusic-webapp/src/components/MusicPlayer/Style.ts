@@ -16,7 +16,7 @@ export const StyledMusicPlayer = styled.div`
 export const StyledControl = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 30px;
 `;
 
 export const StyledTrack = styled.div`

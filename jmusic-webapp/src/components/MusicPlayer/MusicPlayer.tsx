@@ -1,14 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
 import { StyledMusicPlayer, StyledControl, StyledTrack } from "./Style";
-
-import PlayIcon from "../../assets/svg/player/play.svg";
-import PauseIcon from "../../assets/svg/player/pause.svg";
-import StopIcon from "../../assets/svg/player/stop.svg";
-import SkipStartIcon from "../../assets/svg/player/skip_start.svg";
-import SkipEndIcon from "../../assets/svg/player/skip_end.svg";
-
-import { Play, Pause, Stop } from '../UI/index'
+import { Play, Pause, Stop, Skip } from '../UI/index'
 
 const Music1 = require("../../musics/m1.mp3");
 const Music2 = require("../../musics/m2.mp3");
@@ -29,9 +22,14 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
 
   const songs = [Music1, Music2, Music3];
 
-  function playOrPause() {
-    setIsPaused(!isPaused);
-  }
+  function changeMusic(songNumber: number, target: HTMLAudioElement, play: boolean = true) {
+    setSongNumber(songNumber);
+    target.pause();
+    target.load();
+    if (play) {
+      target.play();
+    }
+  } 
 
   function handleTimeUpdate(event: React.SyntheticEvent) {
     event.preventDefault();
@@ -74,11 +72,12 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
 
     // CHANGE SONGS TO MUSICS
     if (newSongNumber < songs.length) {
-      setSongNumber(newSongNumber);
-      target.pause();
-      target.load();
-      target.play();
+      changeMusic(newSongNumber, target);
     }
+  }
+
+  function playOrPause() {
+    setIsPaused(!isPaused);
   }
 
   function play() {
@@ -99,6 +98,37 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
     }
   }
 
+  function stop() {
+    const currentAudio = audio?.current;
+
+    if (currentAudio) {
+      setCurrentTime(0);
+      changeMusic(0, currentAudio, false);
+      playOrPause();
+    }
+  }
+
+  function back() {
+    const currentAudio = audio?.current;
+    const newSongNumber = (songNumber - 1 < 0) ? songs.length-1 : songNumber - 1;
+
+
+    if (currentAudio && newSongNumber >= 0) {
+      changeMusic(newSongNumber, currentAudio);
+    }
+  }
+
+  function go() {
+    const currentAudio = audio?.current;
+
+    // CHANGE SONGS TO MUSICS
+    const newSongNumber = (songNumber + 1 >= songs.length) ? 0 : songNumber + 1;
+
+    if (currentAudio) {
+      changeMusic(newSongNumber, currentAudio);
+    }
+  }
+
   // function stop() {
   //   setCurrentTime(0);
   //   setIsPaused(true);
@@ -109,8 +139,10 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
   return (
     <StyledMusicPlayer>
       <StyledControl>
-        <Stop />
+        <Skip onClick={back} start />
+        <Stop onClick={stop} />
         { isPaused ? <Play onClick={play} /> : <Pause onClick={pause} /> }
+        <Skip onClick={go} />
       </StyledControl>
 
       {/* <Icons>
@@ -141,7 +173,6 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ musics }) => {
         />
         <audio
           ref={audio}
-          preload="metadata"
           onTimeUpdate={handleTimeUpdate}
           onCanPlay={handleStartMusic}
           onEnded={handleEndMusic}

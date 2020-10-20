@@ -15,6 +15,8 @@ import { Musics } from './views/Musics';
 import { Playlists } from './views/Playlists';
 import { Playlist } from './views/Playlist';
 
+import { MusicContext } from './MusicContext';
+
 const StyledApp = styled.div`
   display: inline-block;
   overflow: none;
@@ -23,33 +25,39 @@ const StyledApp = styled.div`
 
 export default function App() {
   const [musics, dispatch] = useReducer((state, action) => {
-    
+    switch (action.type) {
+      case 'PLAY':
+        return [action.payload];
+      default:
+        return state;
+    }
   }, []);
 
   return (
     <StyledApp className="App">
       <Router>
         <Menu />
-        <Router>
-          <Switch>
-            <Route exact path="/playlists">
-              <Playlists />
-            </Route>
+        <MusicContext.Provider value={[musics, dispatch]}>
+          <Router>
+            <Switch>
+              <Route exact path="/playlists">
+                <Playlists />
+              </Route>
 
-            <Route path="/playlist/:playlistId">
-              <Playlist />
-            </Route>
+              <Route path="/playlist/:playlistId">
+                <Playlist />
+              </Route>
 
-            <Route path="/musics">
-              <Musics />
-            </Route>
+              <Route path="/musics">
+                <Musics />
+              </Route>
 
-            <Route path="/">
-              <Redirect to="/playlists" />
-            </Route>
-          </Switch>
-        </Router>
-
+              <Route path="/">
+                <Redirect to="/playlists" />
+              </Route>
+            </Switch>
+          </Router>
+        </MusicContext.Provider>
         <MusicPlayer />
       </Router>
     </StyledApp>

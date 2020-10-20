@@ -6,7 +6,7 @@ interface IconProps {
 }
 
 interface SkipProps extends IconProps {
-  start: boolean;
+  start?: boolean;
 }
 
 export const Pause: React.FC<IconProps> = ({ onClick }) => {
@@ -46,40 +46,41 @@ export const Play: React.FC<IconProps> = ({ onClick }) => {
 export const Stop: React.FC<IconProps> = ({ onClick }) => {
   return (
     <StyledIconContent onClick={onClick}>
-      <svg viewBox="0 0 16 16">
-        <path
+      <svg viewBox="0 0 320 320">
+        <path 
           className="jmusic-icon"
-          d="M5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5A1.5 1.5 0 0 1 5 3.5z"
+          d="M53.3,0h213.3C296.1,0,320,23.9,320,53.3v213.3c0,29.5-23.9,53.3-53.3,53.3H53.3C23.9,320,0,296.1,0,266.7V53.3 C0,23.9,23.9,0,53.3,0z"
         />
       </svg>
-    </StyledIconContent>
+    </StyledIconContent >
   );
 };
 
 
 
-export const Skip: React.FC<SkipProps> = ({ onClick, start }) => {
+export const Skip: React.FC<SkipProps> = ({ onClick, start = false }) => {
 
   if (start) {
     return (
       <StyledIconContent onClick={onClick}>
-        <svg viewBox="0 0 16 16">
+        <svg viewBox="0 0 320 320">
           <path
             className="jmusic-icon"
-            d="M5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5A1.5 1.5 0 0 1 5 3.5z"
+            d="M267.3,4L44.5,133.2V17.8C44.5,8,36.5,0,26.7,0S8.9,8,8.9,17.8v284.4c0,9.8,8,17.8,17.8,17.8s17.8-8,17.8-17.8V186.8 L267.3,316c19.2,11.1,43.8-2.3,43.8-24.8V28.7C311.1,6.3,286.5-7.2,267.3,4z"
           />
         </svg>
-      </StyledIconContent>
+      </StyledIconContent >
     );
   }
 
   return (
     <StyledIconContent onClick={onClick}>
-      <svg viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M12 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
-        <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+      <svg viewBox="0 0 320 320">
+        <path
+          className="jmusic-icon"
+          d="M293.3,0c-9.8,0-17.8,8-17.8,17.8v115.5L52.7,4C33.5-7.2,8.9,6.3,8.9,28.7v262.5c0,22.4,24.6,35.9,43.8,24.8l222.8-129.3 v115.4c0,9.8,8,17.8,17.8,17.8s17.8-8,17.8-17.8V17.8C311.1,8,303.1,0,293.3,0z"
+        />
       </svg>
-    </StyledIconContent>
+    </StyledIconContent >
   );
-
 };
