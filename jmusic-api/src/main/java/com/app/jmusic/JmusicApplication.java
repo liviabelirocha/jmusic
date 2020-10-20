@@ -25,7 +25,7 @@ public class JmusicApplication {
 								.maxAge(3600)
 								.allowedMethods("POST", "GET", "OPTIONS", "DELETE")
 								.allowCredentials(true)
-								.allowedHeaders("Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+								.allowedHeaders("*");
 
 			}
 		};

@@ -1,4 +1,4 @@
-import api from './api';
+import api from "./api";
 
 interface Music {
   name: string;
@@ -11,7 +11,12 @@ export function getMusic(musicId: string) {
 }
 
 export function getMusicsByIds(musicIds: string[]) {
-  function createIdsRequest(str: string, cur: string, curInd: number, arr: string[]) {
+  function createIdsRequest(
+    str: string,
+    cur: string,
+    curInd: number,
+    arr: string[]
+  ) {
     if (curInd === arr.length - 1) {
       return `${str}musicIds=${cur}`;
     }
@@ -19,20 +24,26 @@ export function getMusicsByIds(musicIds: string[]) {
     return `${str}musicIds=${cur}&`;
   }
 
-
   return api.get(`/music?${musicIds.reduce(createIdsRequest, "")}`);
 }
 
 export function getAllMusic() {
-  return api.get('/music/all');
+  return api.get("/music/all");
 }
 
-export function postMusic(music: Music) {
-  return api.post('/music', { data: music });
+export function postMusic(music: Music, file: File) {
+  const data = new FormData();
+  data.append("music", JSON.stringify(music));
+  data.append("file", file);
+  return api.post("/music", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 }
 
 export function patchMusic(music: Music) {
-  return api.patch('/music', { data: music });
+  return api.patch("/music", { data: music });
 }
 
 export function deleteMusic(musicId: string) {
